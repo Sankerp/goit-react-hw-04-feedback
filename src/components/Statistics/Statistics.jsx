@@ -6,23 +6,23 @@ const Statistics = ({ state, total, positivePercentage }) => {
     <Sections title="Statistics">
       <ul>
         <li>
-          <p>Good: </p>
+          <p>Good</p>
           <span>{state.good}</span>
         </li>
         <li>
-          <p>Neutral: </p>
+          <p>Neutral</p>
           <span>{state.neutral}</span>
         </li>
         <li>
-          <p>Bad: </p>
+          <p>Bad</p>
           <span>{state.bad}</span>
         </li>
         <li>
-          <p>Total: </p>
+          <p>Total</p>
           <span>{total}</span>
         </li>
         <li>
-          <p>Positive feedback: </p>
+          <p>Positive feedback</p>
           <span>{positivePercentage}</span>
         </li>
       </ul>

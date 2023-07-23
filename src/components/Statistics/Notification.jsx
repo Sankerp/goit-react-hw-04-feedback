@@ -1,11 +1,11 @@
-
+import { StyledNotifications } from './Notification.styled';
 
 const Notification = () => {
   return (
-<p>
-There is no feedback
-</p>  
-  )
-}
+    <StyledNotifications>
+      <p>There is no feedback</p>
+    </StyledNotifications>
+  );
+};
 
-export default Notification
+export default Notification;

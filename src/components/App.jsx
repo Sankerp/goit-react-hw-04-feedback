@@ -1,46 +1,44 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import Buttons from './Buttons/Buttons';
 import Statistics from './Statistics/Statistics';
 import Notification from './Statistics/Notification';
 
-export class App extends Component {
-  state = {
+export const App = () => {
+  const [options, setOptions] = useState({
     good: 0,
-    neutral: 0,
     bad: 0,
-  };
+    neutral: 0,
+  });
 
-  clickFeedback = e => {
-    this.setState(prevState => ({
+  const clickFeedback = e => {
+    setOptions(prevState => ({
+      ...prevState,
       [e.target.name]: prevState[e.target.name] + 1,
     }));
   };
 
-  totalFeedback = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+  const totalFeedback = () => {
+    return options.good + options.neutral + options.bad;
   };
-  positivePercentage = () => {
-    return this.totalFeedback()
-      ? Number.parseInt((this.state.good / this.totalFeedback()) * 100) + '%'
+  const total = totalFeedback();
+
+  const positivePercentage = () => {
+    return totalFeedback()
+      ? Number.parseInt((options.good / totalFeedback()) * 100) + '%'
       : null;
   };
-
-  render() {
-    const options = Object.keys(this.state);
-    const total = this.totalFeedback();
-    return (
-      <div className="container">
-        <Buttons clickFeedback={this.clickFeedback} options={options} />
-        {Boolean(total) ? (
-          <Statistics
-            state={this.state}
-            total={this.totalFeedback()}
-            positivePercentage={this.positivePercentage()}
-          />
-        ) : (
-          <Notification />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <Buttons clickFeedback={clickFeedback} options={Object.keys(options)} />
+      {Boolean(total) ? (
+        <Statistics
+          state={options}
+          total={totalFeedback()}
+          positivePercentage={positivePercentage()}
+        />
+      ) : (
+        <Notification />
+      )}
+    </div>
+  );
+};
